@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  automaven:
+    build:
+      context: .
+      dockerfile: Dockerfile-automaven
+    depends_on:
+      - pgdocker
+    volumes:
+      - c:/build/docker-tests/java-test-project:/java
+
+  pgdocker:
+    build:
+      context: .
+      dockerfile: Dockerfile-pgdocker
+    
