@@ -2,7 +2,7 @@ groups:
 - name: example
   rules:
   - alert: service_down
-    expr: up{job="ws_monitoring"} == 0
+    expr: up{job="app_monitoring"} == 0
     labels:
       severity: major
     annotations:
