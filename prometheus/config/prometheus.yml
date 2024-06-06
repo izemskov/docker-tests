@@ -1,0 +1,18 @@
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets: ['localhost:9093']
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  - job_name: 'app_monitoring'
+    scrape_interval: 5s
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:5002']

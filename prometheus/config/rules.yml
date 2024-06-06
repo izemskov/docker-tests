@@ -1,0 +1,22 @@
+groups:
+- name: example
+  rules:
+  - alert: service_down
+    expr: up{job="ws_monitoring"} == 0
+    labels:
+      severity: major
+    annotations:
+      description: Service {{ $labels.instance }} is unavailable.
+      value: DOWN ({{ $value }})
+  - alert: notfound_server_error
+    expr: increase(not_found_objects_total[5m]) > 0
+    labels:
+      severity: major
+    annotations:
+      summary: High not found error frequency
+  - alert: internal_server_error
+    expr: increase(internal_errors[5m]) > 0
+    labels:
+      severity: major
+    annotations:
+      summary: High internal errors frequency
